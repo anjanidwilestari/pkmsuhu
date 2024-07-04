@@ -69,11 +69,12 @@
 
               // Update forecast weather cards
               var forecastHTML = `<h2>5-Day Weather Forecast</h2>`;
-              data.forecasts.forEach((forecast) => {
+              data.forecasts.forEach((forecast, index) => {
+                var date = new Date(forecast.date * 1000);
                 forecastHTML += `
                             <div class="forecast-bar">
                                 <div class="forecast-item">
-                                    <p>Date/Time: ${new Date(forecast.date * 1000).toLocaleDateString()}</p>
+                                    <p>Date/Time: ${date.toLocaleDateString()}</p>
                                     <p>Location: ${data.current.location}</p>
                                     <p>Temperature: ${forecast.temperature}°C</p>
                                     <p>Weather: ${forecast.weather} - ${forecast.description}</p>

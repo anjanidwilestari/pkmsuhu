@@ -36,21 +36,29 @@ def get_location():
         forecast_weather_data = forecast_response.json()
 
         if forecast_response.status_code == 200:
-            # Ambil ramalan cuaca 5 hari ke depan
+            # Ambil ramalan cuaca 5 hari ke depan dimulai dari hari setelah hari ini
             forecasts = []
+            dates_seen = set()
+            today_date = current_data['date']
             for forecast in forecast_weather_data['list']:
-                forecast_data = {
-                    'date': forecast['dt'],
-                    'temperature': forecast['main']['temp'],
-                    'weather': forecast['weather'][0]['main'],
-                    'description': forecast['weather'][0]['description']
-                }
-                forecasts.append(forecast_data)
+                # Ambil tanggal saja tanpa jam
+                date = forecast['dt_txt'].split()[0]
+                if date not in dates_seen and forecast['dt'] > today_date:
+                    forecast_data = {
+                        'date': forecast['dt'],
+                        'temperature': forecast['main']['temp'],
+                        'weather': forecast['weather'][0]['main'],
+                        'description': forecast['weather'][0]['description']
+                    }
+                    forecasts.append(forecast_data)
+                    dates_seen.add(date)
+                    if len(forecasts) == 5:
+                        break
 
             return jsonify({
                 "status": "success",
                 "current": current_data,
-                "forecasts": forecasts[:5]  # Ambil hanya 5 hari pertama
+                "forecasts": forecasts
             })
         else:
             error_message = f"Unable to get forecast weather data. Error code {forecast_weather_data['cod']}: {forecast_weather_data['message']}"
