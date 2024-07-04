@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-API_KEY = '4b72b99594c21823da17d783b2ea8b97'  # Ganti dengan API key Anda
+API_KEY = '4b72b99594c21823da17d783b2ea8b97'  # Ganti dengan API key Anda https://home.openweathermap.org/api_keys
 
 @app.route('/')
 def index():
