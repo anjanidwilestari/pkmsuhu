@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Weather Forecast</title>
+    <script>
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+          alert("Geolocation is not supported by this browser.");
+        }
+      }
+
+      function showPosition(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+
+        // Send data to the server
+        fetch("/location", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            latitude: latitude,
+            longitude: longitude,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.status === "success") {
+              document.getElementById("latitude").innerHTML = "Latitude: " + data.latitude;
+              document.getElementById("longitude").innerHTML = "Longitude: " + data.longitude;
+
+              var forecastHTML = "<h2>5-Day Weather Forecast</h2>";
+              data.forecasts.forEach((forecast) => {
+                forecastHTML += `<p>Date/Time: ${forecast.date}</p>`;
+                forecastHTML += `<p>Temperature: ${forecast.temperature}°C</p>`;
+                forecastHTML += `<p>Weather: ${forecast.weather} - ${forecast.description}</p>`;
+                forecastHTML += `<hr>`;
+              });
+              document.getElementById("forecast").innerHTML = forecastHTML;
+            } else {
+              document.getElementById("forecast").innerHTML = "Error: " + data.message;
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            document.getElementById("forecast").innerHTML = "Error fetching weather forecast.";
+          });
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Get Device Location and Weather Forecast</h1>
+    <button onclick="getLocation()">Get Location and Weather Forecast</button>
+    <p id="latitude"></p>
+    <p id="longitude"></p>
+    <div id="forecast"></div>
+  </body>
+</html>
