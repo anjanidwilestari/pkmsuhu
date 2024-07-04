@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-API_KEY = '4b72b99594c21823da17d783b2ea8b97'  # Ganti dengan API key Anda https://home.openweathermap.org/api_keys
+API_KEY = '4b72b99594c21823da17d783b2ea8b97'  # Ganti dengan API key Anda
 
 @app.route('/')
 def index():
@@ -15,33 +15,48 @@ def get_location():
     latitude = data['latitude']
     longitude = data['longitude']
 
-    # Panggil OpenWeatherMap Forecast API untuk mendapatkan ramalan cuaca 5 hari / 3 jam
-    weather_url = f'https://api.openweathermap.org/data/2.5/forecast?lat={latitude}&lon={longitude}&units=metric&appid={API_KEY}'
-    response = requests.get(weather_url)
-    weather_data = response.json()
+    # Panggil OpenWeatherMap Current Weather API untuk mendapatkan cuaca saat ini
+    current_weather_url = f'https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&units=metric&appid={API_KEY}'
+    current_response = requests.get(current_weather_url)
+    current_weather_data = current_response.json()
 
-    if response.status_code == 200:
-        if 'list' in weather_data:
+    if current_response.status_code == 200:
+        # Ambil informasi cuaca saat ini
+        current_data = {
+            'date': current_weather_data['dt'],
+            'location': current_weather_data['name'],
+            'temperature': current_weather_data['main']['temp'],
+            'weather': current_weather_data['weather'][0]['main'],
+            'description': current_weather_data['weather'][0]['description']
+        }
+
+        # Panggil OpenWeatherMap Forecast API untuk mendapatkan ramalan cuaca 5 hari / 3 jam
+        forecast_weather_url = f'https://api.openweathermap.org/data/2.5/forecast?lat={latitude}&lon={longitude}&units=metric&appid={API_KEY}'
+        forecast_response = requests.get(forecast_weather_url)
+        forecast_weather_data = forecast_response.json()
+
+        if forecast_response.status_code == 200:
+            # Ambil ramalan cuaca 5 hari ke depan
             forecasts = []
-            for forecast in weather_data['list']:
+            for forecast in forecast_weather_data['list']:
                 forecast_data = {
-                    'date': forecast['dt_txt'],
+                    'date': forecast['dt'],
                     'temperature': forecast['main']['temp'],
                     'weather': forecast['weather'][0]['main'],
                     'description': forecast['weather'][0]['description']
                 }
                 forecasts.append(forecast_data)
+
             return jsonify({
                 "status": "success",
-                "latitude": latitude,
-                "longitude": longitude,
-                "forecasts": forecasts
+                "current": current_data,
+                "forecasts": forecasts[:5]  # Ambil hanya 5 hari pertama
             })
         else:
-            error_message = "Forecast data not found in API response"
+            error_message = f"Unable to get forecast weather data. Error code {forecast_weather_data['cod']}: {forecast_weather_data['message']}"
             return jsonify({"status": "error", "message": error_message}), 500
     else:
-        error_message = "Unable to get weather forecast data"
+        error_message = f"Unable to get current weather data. Error code {current_weather_data['cod']}: {current_weather_data['message']}"
         return jsonify({"status": "error", "message": error_message}), 500
 
 if __name__ == '__main__':

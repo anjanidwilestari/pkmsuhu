@@ -2,6 +2,32 @@
 <html>
   <head>
     <title>Weather Forecast</title>
+    <style>
+      .card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+      .forecast-bar {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+      .forecast-item {
+        flex: 1;
+        padding: 10px;
+        border-right: 1px solid #ccc;
+        text-align: center;
+      }
+      .forecast-item:last-child {
+        border-right: none;
+      }
+    </style>
     <script>
       function getLocation() {
         if (navigator.geolocation) {
@@ -29,23 +55,41 @@
           .then((response) => response.json())
           .then((data) => {
             if (data.status === "success") {
-              document.getElementById("latitude").innerHTML = "Latitude: " + data.latitude;
-              document.getElementById("longitude").innerHTML = "Longitude: " + data.longitude;
+              // Update current weather card
+              var currentWeatherHTML = `
+                        <div class="card">
+                            <h2>Current Weather</h2>
+                            <p>Date/Time: ${new Date(data.current.date * 1000).toLocaleString()}</p>
+                            <p>Location: ${data.current.location}</p>
+                            <p>Temperature: ${data.current.temperature}°C</p>
+                            <p>Weather: ${data.current.weather} - ${data.current.description}</p>
+                        </div>
+                    `;
+              document.getElementById("current-weather").innerHTML = currentWeatherHTML;
 
-              var forecastHTML = "<h2>5-Day Weather Forecast</h2>";
+              // Update forecast weather cards
+              var forecastHTML = `<h2>5-Day Weather Forecast</h2>`;
               data.forecasts.forEach((forecast) => {
-                forecastHTML += `<p>Date/Time: ${forecast.date}</p>`;
-                forecastHTML += `<p>Temperature: ${forecast.temperature}°C</p>`;
-                forecastHTML += `<p>Weather: ${forecast.weather} - ${forecast.description}</p>`;
-                forecastHTML += `<hr>`;
+                forecastHTML += `
+                            <div class="forecast-bar">
+                                <div class="forecast-item">
+                                    <p>Date/Time: ${new Date(forecast.date * 1000).toLocaleDateString()}</p>
+                                    <p>Location: ${data.current.location}</p>
+                                    <p>Temperature: ${forecast.temperature}°C</p>
+                                    <p>Weather: ${forecast.weather} - ${forecast.description}</p>
+                                </div>
+                            </div>
+                        `;
               });
               document.getElementById("forecast").innerHTML = forecastHTML;
             } else {
+              document.getElementById("current-weather").innerHTML = "Error: " + data.message;
               document.getElementById("forecast").innerHTML = "Error: " + data.message;
             }
           })
           .catch((error) => {
             console.error("Error:", error);
+            document.getElementById("current-weather").innerHTML = "Error fetching current weather.";
             document.getElementById("forecast").innerHTML = "Error fetching weather forecast.";
           });
       }
@@ -54,8 +98,22 @@
   <body>
     <h1>Get Device Location and Weather Forecast</h1>
     <button onclick="getLocation()">Get Location and Weather Forecast</button>
-    <p id="latitude"></p>
-    <p id="longitude"></p>
-    <div id="forecast"></div>
+
+    <!-- Current Weather Card -->
+    <div id="current-weather">
+      <div class="card">
+        <h2>Current Weather</h2>
+        <p>Loading...</p>
+      </div>
+    </div>
+
+    <!-- Forecast Weather Cards -->
+    <div id="forecast">
+      <div class="forecast-bar">
+        <div class="forecast-item">
+          <p>Loading...</p>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
