@@ -27,7 +27,8 @@ def get_location():
             'location': current_weather_data['name'],
             'temperature': current_weather_data['main']['temp'],
             'weather': current_weather_data['weather'][0]['main'],
-            'description': current_weather_data['weather'][0]['description']
+            'description': current_weather_data['weather'][0]['description'],
+            'icon': current_weather_data['weather'][0]['icon']  # Tambahkan icon dari API
         }
 
         # Panggil OpenWeatherMap Forecast API untuk mendapatkan ramalan cuaca 5 hari / 3 jam
@@ -48,7 +49,8 @@ def get_location():
                         'date': forecast['dt'],
                         'temperature': forecast['main']['temp'],
                         'weather': forecast['weather'][0]['main'],
-                        'description': forecast['weather'][0]['description']
+                        'description': forecast['weather'][0]['description'],
+                        'icon': forecast['weather'][0]['icon']  # Tambahkan icon dari API
                     }
                     forecasts.append(forecast_data)
                     dates_seen.add(date)

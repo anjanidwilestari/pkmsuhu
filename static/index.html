@@ -1,120 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Forecast</title>
     <style>
-      .card {
-        border: 1px solid #ccc;
-        border-radius: 5px;
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #fffacd; /* Background color with a light yellow tint */
+        color: #333; /* Text color */
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
         padding: 20px;
-        margin-bottom: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       }
-      .forecast-bar {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-        margin-bottom: 10px;
+      .current-weather,
+      .forecast {
+        margin-bottom: 30px;
       }
-      .forecast-item {
-        flex: 1;
-        padding: 10px;
-        border-right: 1px solid #ccc;
-        text-align: center;
+      h2 {
+        color: #ffa500; /* Orange color for headers */
       }
-      .forecast-item:last-child {
-        border-right: none;
+      .current-weather p,
+      .forecast-item p {
+        margin: 10px 0;
+      }
+      img {
+        vertical-align: middle;
+        margin-left: 10px;
       }
     </style>
-    <script>
-      function getLocation() {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-          alert("Geolocation is not supported by this browser.");
-        }
-      }
-
-      function showPosition(position) {
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
-
-        // Send data to the server
-        fetch("/location", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            latitude: latitude,
-            longitude: longitude,
-          }),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.status === "success") {
-              // Update current weather card
-              var currentWeatherHTML = `
-                        <div class="card">
-                            <h2>Current Weather</h2>
-                            <p>Date/Time: ${new Date(data.current.date * 1000).toLocaleString()}</p>
-                            <p>Location: ${data.current.location}</p>
-                            <p>Temperature: ${data.current.temperature}°C</p>
-                            <p>Weather: ${data.current.weather} - ${data.current.description}</p>
-                        </div>
-                    `;
-              document.getElementById("current-weather").innerHTML = currentWeatherHTML;
-
-              // Update forecast weather cards
-              var forecastHTML = `<h2>5-Day Weather Forecast</h2>`;
-              data.forecasts.forEach((forecast, index) => {
-                var date = new Date(forecast.date * 1000);
-                forecastHTML += `
-                            <div class="forecast-bar">
-                                <div class="forecast-item">
-                                    <p>Date/Time: ${date.toLocaleDateString()}</p>
-                                    <p>Location: ${data.current.location}</p>
-                                    <p>Temperature: ${forecast.temperature}°C</p>
-                                    <p>Weather: ${forecast.weather} - ${forecast.description}</p>
-                                </div>
-                            </div>
-                        `;
-              });
-              document.getElementById("forecast").innerHTML = forecastHTML;
-            } else {
-              document.getElementById("current-weather").innerHTML = "Error: " + data.message;
-              document.getElementById("forecast").innerHTML = "Error: " + data.message;
-            }
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-            document.getElementById("current-weather").innerHTML = "Error fetching current weather.";
-            document.getElementById("forecast").innerHTML = "Error fetching weather forecast.";
-          });
-      }
-    </script>
   </head>
   <body>
-    <h1>Get Device Location and Weather Forecast</h1>
-    <button onclick="getLocation()">Get Location and Weather Forecast</button>
-
-    <!-- Current Weather Card -->
-    <div id="current-weather">
-      <div class="card">
+    <div class="container">
+      <div class="current-weather">
         <h2>Current Weather</h2>
-        <p>Loading...</p>
+        <p>Date/Time: <span id="current-date-time"></span></p>
+        <p>Location: <span id="current-location"></span></p>
+        <p>Temperature: <span id="current-temperature"></span>°C</p>
+        <p>Weather: <span id="current-weather-main"></span> - <span id="current-weather-description"></span></p>
+        <img id="weather-icon" src="" alt="Weather Icon" />
       </div>
-    </div>
 
-    <!-- Forecast Weather Cards -->
-    <div id="forecast">
-      <div class="forecast-bar">
-        <div class="forecast-item">
-          <p>Loading...</p>
+      <div class="forecast">
+        <h2>5-Day Weather Forecast</h2>
+        <div class="forecast-items" id="forecast-items">
+          <!-- Forecast items will be added dynamically here -->
         </div>
       </div>
     </div>
+
+    <script>
+      // Script to fetch data from Flask backend and update HTML
+      fetch("/location", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          latitude: -7.6509915,
+          longitude: 112.917784,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status === "success") {
+            document.getElementById("current-date-time").textContent = new Date().toLocaleString();
+            document.getElementById("current-location").textContent = data.current.location;
+            document.getElementById("current-temperature").textContent = data.current.temperature;
+            document.getElementById("current-weather-main").textContent = data.current.weather;
+            document.getElementById("current-weather-description").textContent = data.current.description;
+            document.getElementById("weather-icon").src = `http://openweathermap.org/img/wn/${data.current.icon}.png`;
+
+            const forecastItems = document.getElementById("forecast-items");
+            data.forecasts.forEach((forecast) => {
+              const forecastItem = document.createElement("div");
+              forecastItem.classList.add("forecast-item");
+              forecastItem.innerHTML = `
+                        <p>Date/Time: ${new Date(forecast.date * 1000).toLocaleDateString()}</p>
+                        <p>Location: ${data.current.location}</p>
+                        <p>Temperature: ${forecast.temperature}°C</p>
+                        <p>Weather: ${forecast.weather} - ${forecast.description}</p>
+                        <img src="http://openweathermap.org/img/wn/${forecast.icon}.png" alt="Weather Icon">
+                    `;
+              forecastItems.appendChild(forecastItem);
+            });
+          } else {
+            console.error("Error fetching weather data:", data.message);
+          }
+        })
+        .catch((error) => console.error("Error fetching weather data:", error));
+    </script>
   </body>
 </html>
