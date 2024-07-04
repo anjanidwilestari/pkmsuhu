@@ -1,5 +1,5 @@
 import requests
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
@@ -7,7 +7,7 @@ API_KEY = '4b72b99594c21823da17d783b2ea8b97'  # Ganti dengan API key Anda
 
 @app.route('/')
 def index():
-    return app.send_static_file('index.html')
+    return render_template('index.html')
 
 @app.route('/location', methods=['POST'])
 def get_location():
@@ -68,6 +68,10 @@ def get_location():
     else:
         error_message = f"Unable to get current weather data. Error code {current_weather_data['cod']}: {current_weather_data['message']}"
         return jsonify({"status": "error", "message": error_message}), 500
+
+@app.route('/predict')
+def predict():
+    return render_template('predict.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
