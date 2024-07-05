@@ -7,7 +7,7 @@
     <style>
       body {
         font-family: Arial, sans-serif;
-        background-color: #fffacd; /* Background color with a light yellow tint */
+        background-color: #fffacd; /* Light yellow background */
         color: #333; /* Text color */
         margin: 0;
         padding: 0;
@@ -20,82 +20,149 @@
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       }
-      .current-weather,
-      .forecast {
-        margin-bottom: 30px;
-      }
+      h1,
       h2 {
         color: #ffa500; /* Orange color for headers */
+        text-align: center;
       }
-      .current-weather p,
+      .current-weather {
+        margin-bottom: 30px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        text-align: center;
+      }
+      .current-weather img {
+        vertical-align: middle;
+        margin-left: 10px;
+      }
+      .forecast {
+        display: flex;
+        justify-content: space-between;
+        overflow-x: auto;
+      }
+      .forecast-item {
+        flex: 0 0 18%; /* Width of each forecast block */
+        margin: 0 5px;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
       .forecast-item p {
         margin: 10px 0;
       }
-      img {
-        vertical-align: middle;
-        margin-left: 10px;
+      .button-container {
+        text-align: center;
+        margin-top: 20px;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #ffa500;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #e69500;
       }
     </style>
   </head>
   <body>
     <div class="container">
+      <h1>Weather Forecast</h1>
       <div class="current-weather">
         <h2>Current Weather</h2>
         <p>Date/Time: <span id="current-date-time"></span></p>
         <p>Location: <span id="current-location"></span></p>
         <p>Temperature: <span id="current-temperature"></span>°C</p>
         <p>Weather: <span id="current-weather-main"></span> - <span id="current-weather-description"></span></p>
-        <img id="weather-icon" src="" alt="Weather Icon" />
+        <img id="current-weather-icon" src="" alt="Weather Icon" />
       </div>
-
       <div class="forecast">
-        <h2>5-Day Weather Forecast</h2>
-        <div class="forecast-items" id="forecast-items">
-          <!-- Forecast items will be added dynamically here -->
+        <div class="forecast-item" id="forecast-1">
+          <p class="forecast-date"></p>
+          <img class="forecast-weather-icon" src="" alt="Weather Icon" />
+          <p class="forecast-temperature"></p>
+          <p class="forecast-weather-main"></p>
         </div>
+        <div class="forecast-item" id="forecast-2">
+          <p class="forecast-date"></p>
+          <img class="forecast-weather-icon" src="" alt="Weather Icon" />
+          <p class="forecast-temperature"></p>
+          <p class="forecast-weather-main"></p>
+        </div>
+        <div class="forecast-item" id="forecast-3">
+          <p class="forecast-date"></p>
+          <img class="forecast-weather-icon" src="" alt="Weather Icon" />
+          <p class="forecast-temperature"></p>
+          <p class="forecast-weather-main"></p>
+        </div>
+        <div class="forecast-item" id="forecast-4">
+          <p class="forecast-date"></p>
+          <img class="forecast-weather-icon" src="" alt="Weather Icon" />
+          <p class="forecast-temperature"></p>
+          <p class="forecast-weather-main"></p>
+        </div>
+        <div class="forecast-item" id="forecast-5">
+          <p class="forecast-date"></p>
+          <img class="forecast-weather-icon" src="" alt="Weather Icon" />
+          <p class="forecast-temperature"></p>
+          <p class="forecast-weather-main"></p>
+        </div>
+      </div>
+      <div class="button-container">
+        <button onclick="getLocationAndWeather()">Get Location and Weather</button>
       </div>
     </div>
 
     <script>
-      // Script to fetch data from Flask backend and update HTML
-      fetch("/location", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          latitude: -7.6509915,
-          longitude: 112.917784,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.status === "success") {
-            document.getElementById("current-date-time").textContent = new Date().toLocaleString();
-            document.getElementById("current-location").textContent = data.current.location;
-            document.getElementById("current-temperature").textContent = data.current.temperature;
-            document.getElementById("current-weather-main").textContent = data.current.weather;
-            document.getElementById("current-weather-description").textContent = data.current.description;
-            document.getElementById("weather-icon").src = `http://openweathermap.org/img/wn/${data.current.icon}.png`;
+      function getLocationAndWeather() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition((position) => {
+            fetch("/location", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+              }),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.status === "success") {
+                  // Update current weather
+                  document.getElementById("current-date-time").textContent = new Date(data.current.date * 1000).toLocaleString();
+                  document.getElementById("current-location").textContent = data.current.location;
+                  document.getElementById("current-temperature").textContent = data.current.temperature;
+                  document.getElementById("current-weather-main").textContent = data.current.weather;
+                  document.getElementById("current-weather-description").textContent = data.current.description;
+                  document.getElementById("current-weather-icon").src = `http://openweathermap.org/img/wn/${data.current.icon}.png`;
 
-            const forecastItems = document.getElementById("forecast-items");
-            data.forecasts.forEach((forecast) => {
-              const forecastItem = document.createElement("div");
-              forecastItem.classList.add("forecast-item");
-              forecastItem.innerHTML = `
-                        <p>Date/Time: ${new Date(forecast.date * 1000).toLocaleDateString()}</p>
-                        <p>Location: ${data.current.location}</p>
-                        <p>Temperature: ${forecast.temperature}°C</p>
-                        <p>Weather: ${forecast.weather} - ${forecast.description}</p>
-                        <img src="http://openweathermap.org/img/wn/${forecast.icon}.png" alt="Weather Icon">
-                    `;
-              forecastItems.appendChild(forecastItem);
-            });
-          } else {
-            console.error("Error fetching weather data:", data.message);
-          }
-        })
-        .catch((error) => console.error("Error fetching weather data:", error));
+                  // Update 5-day forecast
+                  for (let i = 0; i < data.forecasts.length; i++) {
+                    const forecast = data.forecasts[i];
+                    document.querySelector(`#forecast-${i + 1} .forecast-date`).textContent = new Date(forecast.date * 1000).toLocaleDateString();
+                    document.querySelector(`#forecast-${i + 1} .forecast-temperature`).textContent = `${forecast.temperature}°C`;
+                    document.querySelector(`#forecast-${i + 1} .forecast-weather-main`).textContent = `${forecast.weather} - ${forecast.description}`;
+                    document.querySelector(`#forecast-${i + 1} .forecast-weather-icon`).src = `http://openweathermap.org/img/wn/${forecast.icon}.png`;
+                  }
+                } else {
+                  alert(data.message);
+                }
+              })
+              .catch((error) => console.error("Error:", error));
+          });
+        } else {
+          alert("Geolocation is not supported by this browser.");
+        }
+      }
     </script>
   </body>
 </html>
