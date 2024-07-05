@@ -4,103 +4,132 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Forecast</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
     <style>
+      .dashboard {
+        background-image: url("https://images.pexels.com/photos/6746690/pexels-photo-6746690.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
       body {
-        font-family: Arial, sans-serif;
-        background-color: #fffacd; /* Light yellow background */
-        color: #333; /* Text color */
+        background-color: #f9f9fa;
         margin: 0;
         padding: 0;
+        height: 100vh;
+        overflow: hidden;
       }
-      .container {
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
-      h1,
-      h2 {
-        color: #ffa500; /* Orange color for headers */
-        text-align: center;
-      }
-      .current-weather {
-        margin-bottom: 30px;
-        padding: 20px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        background-color: #f9f9f9;
-        text-align: center;
-      }
-      .current-weather img {
-        vertical-align: middle;
-        margin-left: 10px;
-      }
-      .forecast {
+
+      .card {
+        border: 0;
+        border-radius: 2px;
+        background: #e1ecff;
+        background-image: linear-gradient(to left bottom, #ffecd2, #ffdbb5, #ffc898, #ffb679, #ffa25b);
+        width: 90%;
+        height: 90%;
         display: flex;
-        justify-content: space-between;
-        overflow-x: auto;
+        flex-direction: column;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       }
-      .forecast-item {
-        flex: 0 0 18%; /* Width of each forecast block */
-        margin: 0 5px;
-        padding: 10px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+
+      .card-body {
+        flex: 1;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .weather-date-location {
+        margin-bottom: 1rem;
+      }
+
+      .display-3 {
+        font-size: 3rem;
+      }
+
+      .weakly-weather {
+        display: flex;
+        overflow-x: auto;
+        background: #fff;
+        border-top: 1px solid #f2f2f2;
+        padding: 1rem;
+        margin-top: auto;
+      }
+
+      .weakly-weather-item {
+        flex: 1;
         text-align: center;
       }
-      .forecast-item p {
-        margin: 10px 0;
+
+      .weakly-weather-item img {
+        width: 2rem;
+        height: 2rem;
+      }
+
+      @media (max-width: 991.98px) {
+        .display-3 {
+          font-size: 2rem;
+        }
+
+        .weakly-weather-item p {
+          font-size: 0.875rem;
+        }
+
+        .weakly-weather-item img {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+      }
+
+      @media (max-width: 767.98px) {
+        .display-3 {
+          font-size: 1.5rem;
+        }
+
+        .weakly-weather-item p {
+          font-size: 0.75rem;
+        }
+
+        .weakly-weather-item img {
+          width: 1.25rem;
+          height: 1.25rem;
+        }
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <h1>Weather Forecast</h1>
-      <div class="current-weather">
-        <h2>Current Weather</h2>
-        <p>Date/Time: <span id="current-date-time"></span></p>
-        <p>Location: <span id="current-location"></span></p>
-        <p>Temperature: <span id="current-temperature"></span>°C</p>
-        <p>Weather: <span id="current-weather-main"></span> - <span id="current-weather-description"></span></p>
-        <img id="current-weather-icon" src="" alt="Weather Icon" />
-      </div>
-      <div class="forecast">
-        <div class="forecast-item" id="forecast-1">
-          <p class="forecast-date"></p>
-          <img class="forecast-weather-icon" src="" alt="Weather Icon" />
-          <p class="forecast-temperature"></p>
-          <p class="forecast-weather-main"></p>
-        </div>
-        <div class="forecast-item" id="forecast-2">
-          <p class="forecast-date"></p>
-          <img class="forecast-weather-icon" src="" alt="Weather Icon" />
-          <p class="forecast-temperature"></p>
-          <p class="forecast-weather-main"></p>
-        </div>
-        <div class="forecast-item" id="forecast-3">
-          <p class="forecast-date"></p>
-          <img class="forecast-weather-icon" src="" alt="Weather Icon" />
-          <p class="forecast-temperature"></p>
-          <p class="forecast-weather-main"></p>
-        </div>
-        <div class="forecast-item" id="forecast-4">
-          <p class="forecast-date"></p>
-          <img class="forecast-weather-icon" src="" alt="Weather Icon" />
-          <p class="forecast-temperature"></p>
-          <p class="forecast-weather-main"></p>
-        </div>
-        <div class="forecast-item" id="forecast-5">
-          <p class="forecast-date"></p>
-          <img class="forecast-weather-icon" src="" alt="Weather Icon" />
-          <p class="forecast-temperature"></p>
-          <p class="forecast-weather-main"></p>
+    <section class="dashboard">
+      <div class="card card-weather">
+        <div class="card-body">
+          <div class="weather-date-location">
+            <h3 id="current-day">Friday</h3>
+            <p class="text-gray">
+              <span class="weather-date" id="current-date">25 March, 2019</span>
+              <span class="weather-location" id="current-location">Sydney, Australia</span>
+            </p>
+          </div>
+          <div class="weather-data d-flex">
+            <div class="mr-auto">
+              <h4 class="display-3">
+                <span id="current-temperature">32</span>
+                <span class="symbol">&deg;</span>C
+              </h4>
+              <p id="current-weather">Cloudy</p>
+            </div>
+          </div>
+          <div class="weakly-weather" id="forecast">
+            <!-- Forecast items will be appended here dynamically -->
+          </div>
         </div>
       </div>
-    </div>
+    </section>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
       window.onload = function () {
         if (navigator.geolocation) {
@@ -119,20 +148,27 @@
               .then((data) => {
                 if (data.status === "success") {
                   // Update current weather
-                  document.getElementById("current-date-time").textContent = new Date(data.current.date * 1000).toLocaleString();
+                  const currentDate = new Date(data.current.date * 1000);
+                  document.getElementById("current-day").textContent = currentDate.toLocaleDateString("en-US", { weekday: "long" });
+                  document.getElementById("current-date").textContent = currentDate.toLocaleDateString();
                   document.getElementById("current-location").textContent = data.current.location;
                   document.getElementById("current-temperature").textContent = data.current.temperature;
-                  document.getElementById("current-weather-main").textContent = data.current.weather;
-                  document.getElementById("current-weather-description").textContent = data.current.description;
-                  document.getElementById("current-weather-icon").src = `http://openweathermap.org/img/wn/${data.current.icon}.png`;
+                  document.getElementById("current-weather").textContent = `${data.current.weather} - ${data.current.description}`;
 
                   // Update 5-day forecast
+                  const forecastContainer = document.getElementById("forecast");
+                  forecastContainer.innerHTML = "";
                   for (let i = 0; i < data.forecasts.length; i++) {
                     const forecast = data.forecasts[i];
-                    document.querySelector(`#forecast-${i + 1} .forecast-date`).textContent = new Date(forecast.date * 1000).toLocaleDateString();
-                    document.querySelector(`#forecast-${i + 1} .forecast-temperature`).textContent = `${forecast.temperature}°C`;
-                    document.querySelector(`#forecast-${i + 1} .forecast-weather-main`).textContent = `${forecast.weather} - ${forecast.description}`;
-                    document.querySelector(`#forecast-${i + 1} .forecast-weather-icon`).src = `http://openweathermap.org/img/wn/${forecast.icon}.png`;
+                    const forecastDate = new Date(forecast.date * 1000);
+                    const forecastItem = document.createElement("div");
+                    forecastItem.className = "weakly-weather-item";
+                    forecastItem.innerHTML = `
+                                    <p class="mb-0">${forecastDate.toLocaleDateString("en-US", { weekday: "short" })}</p>
+                                    <img src="http://openweathermap.org/img/wn/${forecast.icon}.png" alt="Weather Icon">
+                                    <p class="mb-0">${forecast.temperature}&deg;C</p>
+                                `;
+                    forecastContainer.appendChild(forecastItem);
                   }
                 } else {
                   alert(data.message);
