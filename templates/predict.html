@@ -149,9 +149,20 @@
                 if (data.status === "success") {
                   // Update current weather
                   const currentDate = new Date(data.current.date * 1000);
-                  document.getElementById("current-day").textContent = currentDate.toLocaleDateString("en-US", { weekday: "long" });
-                  document.getElementById("current-date").textContent = currentDate.toLocaleDateString();
-                  document.getElementById("current-location").textContent = data.current.location;
+                  const options = {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                    hour: "numeric",
+                    minute: "numeric",
+                    hour12: true,
+                  };
+                  const formattedDate = currentDate.toLocaleDateString("en-US", options);
+                  const [datePart, timePart] = formattedDate.split(" at ");
+                  document.getElementById("current-day").textContent = datePart;
+                  document.getElementById("current-date").textContent = timePart;
+                  document.getElementById("current-location").textContent = `${data.current.location}`;
                   document.getElementById("current-temperature").textContent = data.current.temperature;
                   document.getElementById("current-weather").textContent = `${data.current.weather} - ${data.current.description}`;
 
