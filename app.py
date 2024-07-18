@@ -31,6 +31,9 @@ def get_location():
             'icon': current_weather_data['weather'][0]['icon']  # Add icon from API
         }
 
+        # Determine plant care based on temperature
+        plant_care_info = get_plant_care_info(current_data['temperature'])
+
         # Call OpenWeatherMap Forecast API to get 5-day / 3-hour forecast
         forecast_weather_url = f'https://api.openweathermap.org/data/2.5/forecast?lat={latitude}&lon={longitude}&units=metric&appid={API_KEY}'
         forecast_response = requests.get(forecast_weather_url)
@@ -60,7 +63,8 @@ def get_location():
             return jsonify({
                 "status": "success",
                 "current": current_data,
-                "forecasts": forecasts
+                "forecasts": forecasts,
+                "plant_care_info": plant_care_info  # Include plant care information
             })
         else:
             error_message = f"Unable to get forecast weather data. Error code {forecast_weather_data['cod']}: {forecast_weather_data['message']}"
@@ -68,6 +72,50 @@ def get_location():
     else:
         error_message = f"Unable to get current weather data. Error code {current_weather_data['cod']}: {current_weather_data['message']}"
         return jsonify({"status": "error", "message": error_message}), 500
+
+def get_plant_care_info(temperature):
+    if temperature < 10:
+        return {
+            'category': 'Suhu Dingin (di bawah 10°C)',
+            'info': [
+                'Lindungi tanaman dari embun beku dengan penghangat atau penutup.',
+                'Periksa tanaman secara rutin untuk mencegah kerusakan.'
+            ]
+        }
+    elif 10 <= temperature < 20:
+        return {
+            'category': 'Suhu 10-20°C',
+            'info': [
+                'Lindungi tanaman dari sinar matahari langsung yang terlalu intens.',
+                'Pastikan kelembaban tanah cukup tetapi tidak berlebihan.',
+                'Jaga agar tanah tetap gembur untuk pertumbuhan akar yang sehat.'
+            ]
+        }
+    elif 20 <= temperature < 30:
+        return {
+            'category': 'Suhu Optimal (sekitar 20-30°C)',
+            'info': [
+                'Pastikan tanaman mendapatkan cahaya matahari yang cukup.',
+                'Monitor kelembaban tanah dan penyiraman secara teratur.'
+            ]
+        }
+    elif 30 <= temperature < 35:
+        return {
+            'category': 'Suhu 30-35°C',
+            'info': [
+                'Lindungi tanaman dari sinar matahari langsung yang terlalu intens dengan peneduh.',
+                'Pastikan tanah tetap lembab dengan penyiraman lebih sering.',
+                'Berikan ventilasi yang cukup untuk mengurangi panas berlebih.'
+            ]
+        }
+    else:
+        return {
+            'category': 'Suhu Panas (di atas 35°C)',
+            'info': [
+                'Lindungi tanaman dari panas berlebih dengan teduhkan dan penyiraman ekstra.',
+                'Pertimbangkan untuk menggunakan mulsa atau penutup tanah untuk menjaga kelembaban.'
+            ]
+        }
 
 @app.route('/predict')
 def predict():

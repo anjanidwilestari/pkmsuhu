@@ -106,6 +106,7 @@
     <section class="dashboard">
       <div class="card card-weather">
         <div class="card-body">
+          <!-- Left side: Weather information -->
           <div class="weather-date-location">
             <h3 id="current-day">Friday</h3>
             <p class="text-gray">
@@ -122,8 +123,15 @@
               <p id="current-weather">Cloudy</p>
             </div>
           </div>
+          <!-- Right side: Plant care information -->
+          <div class="plant-care-info">
+            <h3>Plant Care Information</h3>
+            <div id="plant-care-info">
+              <!-- Plant care information will be appended here dynamically -->
+            </div>
+          </div>
           <div class="weakly-weather" id="forecast">
-            <!-- Forecast items will be appended here dynamically -->
+            <!-- Forecast items remain unchanged -->
           </div>
         </div>
       </div>
@@ -166,6 +174,17 @@
                   document.getElementById("current-temperature").textContent = data.current.temperature;
                   document.getElementById("current-weather").textContent = `${data.current.weather} - ${data.current.description}`;
 
+                  // Update plant care information
+                  const plantCareInfoContainer = document.getElementById("plant-care-info");
+                  const plantCareInfo = data.plant_care_info;
+                  const plantCareInfoHtml = `
+                    <p>${plantCareInfo.category}</p>
+                    <ul>
+                      ${plantCareInfo.info.map((info) => `<li>${info}</li>`).join("")}
+                    </ul>
+                  `;
+                  plantCareInfoContainer.innerHTML = plantCareInfoHtml;
+
                   // Update 5-day forecast
                   const forecastContainer = document.getElementById("forecast");
                   forecastContainer.innerHTML = "";
@@ -175,10 +194,10 @@
                     const forecastItem = document.createElement("div");
                     forecastItem.className = "weakly-weather-item";
                     forecastItem.innerHTML = `
-                                    <p class="mb-0">${forecastDate.toLocaleDateString("en-US", { weekday: "short" })}</p>
-                                    <img src="http://openweathermap.org/img/wn/${forecast.icon}.png" alt="Weather Icon">
-                                    <p class="mb-0">${forecast.temperature}&deg;C</p>
-                                `;
+                      <p class="mb-0">${forecastDate.toLocaleDateString("en-US", { weekday: "short" })}</p>
+                      <img src="http://openweathermap.org/img/wn/${forecast.icon}.png" alt="Weather Icon">
+                      <p class="mb-0">${forecast.temperature}&deg;C</p>
+                    `;
                     forecastContainer.appendChild(forecastItem);
                   }
                 } else {
