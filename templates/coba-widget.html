@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landing Page</title>
+    <link rel="stylesheet" href="static/css/home-style.css" />
+    <link rel="icon" href="static/img/favicon.png" type="image/png" />
+    <style>
+      /* Styles for the aside table */
+      .aside-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .aside-table caption h3 {
+        margin: 0;
+        padding: 10px;
+        background-color: #f3b664;
+        color: #fff;
+        text-align: center;
+      }
+
+      .aside-table th,
+      .aside-table td {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ddd;
+      }
+
+      .aside-table img.icon-img {
+        width: 40px; /* Adjust size as needed */
+        height: auto;
+      }
+
+      .region-sidebar {
+        position: fixed;
+        top: 50px; /* Adjust as needed */
+        right: 0;
+        width: 300px; /* Adjust width as needed */
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+        max-height: 90vh; /* Ensures the table doesn't go out of the viewport */
+        z-index: 1000;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Main Content -->
+    <main id="MainContent">
+      <!-- Your existing content -->
+    </main>
+
+    <!-- Aside Table -->
+    <aside class="region-sidebar regionSidebar DaybreakLargeScreen--regionSidebar--20oS9" aria-label="Sidebar">
+      <div id="WxuAirQuality-sidebar-aa4a4fb6-4a9b-43be-9004-b14790f57d73" class="removeIfEmpty">
+        <div data-cq-observe="true" data-cq-breakpoints='{"AirQuality--sm--1F-8j":0,"AirQuality--md--uS8YB":649}' class="AirQuality--airQualitySuite--25n8w AirQuality--sm--1F-8j">
+          <section aria-label="INDEKS KUALITAS UDARA" class="card Card--card--2AzRg Card--containerQuery--T7772" title="INDEKS KUALITAS UDARA" data-testid="AirQualityModule">
+            <header data-testid="HeaderTitle" class="Card--cardHeader--3NRFf">
+              <h2 class="Card--cardHeading--2H1-_">INDEKS KUALITAS UDARA</h2>
+            </header>
+            <div class="Card--content--1GQMr">
+              <div class="AirQuality--AirQualityCard--EONAt" data-testid="AirQualityCard">
+                <div class="AirQuality--center--2mEW_ AirQuality--leftCol--32BhX">
+                  <div class="AirQuality--col--3I-4C">
+                    <svg width="60" height="60" data-testid="DonutChart" class="DonutChart--donutchart--1W28b">
+                      <circle r="27.5" cx="30" cy="30" transform="rotate(90 30 30)" style="stroke-width: 5" class="DonutChart--track--1fk6L"></circle>
+                      <circle r="27.5" cx="30" cy="30" transform="rotate(90 30 30)" style="stroke-width: 5; stroke-dasharray: 86.39379797371932 172.78759594743863; stroke: #ff7200" class="DonutChart--indicator--NTUT5"></circle>
+                      <text x="50%" y="55%" dominant-baseline="middle" alignment-baseline="middle" text-anchor="middle" class="DonutChart--innerValue--3_iFF AirQuality--innerValueLowerTextSize--3Yzk8" data-testid="DonutChartValue">126</text>
+                    </svg>
+                  </div>
+                  <div class="AirQuality--col--3I-4C">
+                    <div class="AirQualityText--AirQuality--UALR6">
+                      <span class="AirQualityText--severity--W9CtX" data-testid="AirQualityCategory">Tidak Sehat untuk Kelompok Sensitif</span>
+                      <p class="AirQualityText--severityText--1Bkxv" data-testid="AirQualitySeverity">Anggota grup sensitif mungkin mengalami dampak kesehatan. Masyarakat umum cenderung tidak terpengaruh.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="AirQuality--detailsButtonWrapper--1_unO">
+                <a class="AirQuality--detailsButton--9q6hw Button--primary--1eZwN" href="/id-ID/forecast/air-quality/l/66186abfc545958beb5d2563cfba3e1669a0e080ff214f7080b40d75014e7b4464d0cb6dd768e51f12811131ce43dd2e" target="_self">Lihat Detail</a>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- Table within the aside -->
+      <table class="aside-table">
+        <caption>
+          <h3>Icon List<a href="#Icon-list" class="wiki-anchor"></a></h3>
+        </caption>
+        <tbody>
+          <tr>
+            <th>Day Icon</th>
+            <th>Night Icon</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td>01d.png <img src="http://openweathermap.org/img/wn/01d@2x.png" alt="" class="icon-img" /></td>
+            <td>01n.png <img src="http://openweathermap.org/img/wn/01n@2x.png" alt="" class="icon-img" /></td>
+            <td>Clear Sky</td>
+          </tr>
+          <tr>
+            <td>02d.png <img src="http://openweathermap.org/img/wn/02d@2x.png" alt="" class="icon-img" /></td>
+            <td>02n.png <img src="http://openweathermap.org/img/wn/02n@2x.png" alt="" class="icon-img" /></td>
+            <td>Few Clouds</td>
+          </tr>
+          <tr>
+            <td>03d.png <img src="http://openweathermap.org/img/wn/03d@2x.png" alt="" class="icon-img" /></td>
+            <td>03n.png <img src="http://openweathermap.org/img/wn/03n@2x.png" alt="" class="icon-img" /></td>
+            <td>Scattered Clouds</td>
+          </tr>
+          <tr>
+            <td>04d.png <img src="http://openweathermap.org/img/wn/04d@2x.png" alt="" class="icon-img" /></td>
+            <td>04n.png <img src="http://openweathermap.org/img/wn/04n@2x.png" alt="" class="icon-img" /></td>
+            <td>Broken Clouds</td>
+          </tr>
+          <tr>
+            <td>09d.png <img src="http://openweathermap.org/img/wn/09d@2x.png" alt="" class="icon-img" /></td>
+            <td>09n.png <img src="http://openweathermap.org/img/wn/09n@2x.png" alt="" class="icon-img" /></td>
+            <td>Shower Rain</td>
+          </tr>
+          <tr>
+            <td>10d.png <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="" class="icon-img" /></td>
+            <td>10n.png <img src="http://openweathermap.org/img/wn/10n@2x.png" alt="" class="icon-img" /></td>
+            <td>Rain</td>
+          </tr>
+          <tr>
+            <td>11d.png <img src="http://openweathermap.org/img/wn/11d@2x.png" alt="" class="icon-img" /></td>
+            <td>11n.png <img src="http://openweathermap.org/img/wn/11n@2x.png" alt="" class="icon-img" /></td>
+            <td>Thunderstorm</td>
+          </tr>
+          <tr>
+            <td>13d.png <img src="http://openweathermap.org/img/wn/13d@2x.png" alt="" class="icon-img" /></td>
+            <td>13n.png <img src="http://openweathermap.org/img/wn/13n@2x.png" alt="" class="icon-img" /></td>
+            <td>Snow</td>
+          </tr>
+          <tr>
+            <td>50d.png <img src="http://openweathermap.org/img/wn/50d@2x.png" alt="" class="icon-img" /></td>
+            <td>50n.png <img src="http://openweathermap.org/img/wn/50n@2x.png" alt="" class="icon-img" /></td>
+            <td>Mist</td>
+          </tr>
+        </tbody>
+      </table>
+    </aside>
+  </body>
+</html>

@@ -1,0 +1,108 @@
+/* Base styles */
+
+.card {
+  border: 0;
+  border-radius: 2px;
+  background: #e1ecff;
+  width: 90%;
+  margin-top: 20px; /* Add some margin to the top */
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-weather {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 8px; /* Rounded corners for the card */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow for card */
+  padding: 1rem;
+}
+
+.weakly-weather {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-top: 1px solid #f2f2f2;
+  overflow-y: auto; /* Allow vertical scrolling */
+}
+
+.daily-forecast {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #e0e0e0; /* Light border around daily forecast */
+  border-radius: 8px; /* Rounded corners */
+}
+
+.forecast-title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.hourly-weather {
+  display: flex;
+  overflow-x: auto; /* Allow horizontal scrolling */
+  gap: 0.5rem; /* Space between items */
+}
+
+.hourly-weather-item {
+  flex: 0 0 auto; /* Prevent items from shrinking */
+  text-align: center;
+  background: #f9f9f9; /* Light background for items */
+  border-radius: 8px; /* Rounded corners */
+  padding: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Light shadow for items */
+}
+
+.hourly-weather-item img {
+  width: 2rem;
+  height: 2rem;
+}
+
+@media (max-width: 991.98px) {
+  .display-3 {
+    font-size: 2rem;
+  }
+
+  .hourly-weather-item p {
+    font-size: 0.875rem;
+  }
+
+  .hourly-weather-item img {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .display-3 {
+    font-size: 1.5rem;
+  }
+
+  .hourly-weather-item p {
+    font-size: 0.75rem;
+  }
+
+  .hourly-weather-item img {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+.aside-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85em; /* Smaller text size */
+}
+
+.aside-table th,
+.aside-table td {
+  padding: 5px; /* Smaller padding */
+  text-align: center;
+}
+
+.aside-table img.icon-img {
+  width: 30px; /* Smaller image size */
+  height: auto;
+}

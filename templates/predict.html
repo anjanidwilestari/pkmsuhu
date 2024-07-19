@@ -1,168 +1,285 @@
-<!DOCTYPE html>
-<html lang="en">
+<html dir="ltr" lang="id-ID">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather Forecast</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
-    <style>
-      .dashboard {
-        background-image: url("https://images.pexels.com/photos/6746690/pexels-photo-6746690.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
-        background-size: cover;
-        background-repeat: no-repeat;
-        min-height: 100vh; /* Use min-height instead of height */
-        display: flex;
-        justify-content: center;
-        align-items: flex-start; /* Align items to the start */
-        overflow-y: auto; /* Allow vertical scrolling */
-      }
-
-      body {
-        background-color: #f9f9fa;
-        margin: 0;
-        padding: 0;
-        min-height: 100vh; /* Use min-height instead of height */
-        overflow-y: auto; /* Allow vertical scrolling */
-      }
-
-      .card {
-        border: 0;
-        border-radius: 2px;
-        background: #e1ecff;
-        background-image: linear-gradient(to left bottom, #ffecd2, #ffdbb5, #ffc898, #ffb679, #ffa25b);
-        width: 90%;
-        margin-top: 20px; /* Add some margin to the top */
-        display: flex;
-        flex-direction: column;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      }
-
-      .card-body {
-        flex: 1;
-        padding: 1.5rem;
-        display: flex;
-        flex-direction: column;
-        overflow-y: auto; /* Allow vertical scrolling */
-      }
-
-      .weather-date-location {
-        margin-bottom: 1rem;
-      }
-
-      .display-3 {
-        font-size: 3rem;
-      }
-
-      .weather-data {
-        display: flex;
-        margin-bottom: 1rem;
-      }
-
-      .plant-care-info {
-        margin-bottom: 1rem;
-      }
-
-      .weakly-weather {
-        display: flex;
-        flex-direction: column;
-        background: #fff;
-        border-top: 1px solid #f2f2f2;
-        padding: 1rem;
-        margin-top: auto;
-        overflow-y: auto; /* Allow vertical scrolling */
-      }
-
-      .daily-forecast {
-        margin-bottom: 1rem;
-      }
-
-      .forecast-title {
-        font-weight: bold;
-        margin-bottom: 0.5rem;
-      }
-
-      .hourly-weather {
-        display: flex;
-        overflow-x: auto; /* Allow horizontal scrolling */
-      }
-
-      .hourly-weather-item {
-        flex: 1;
-        text-align: center;
-        margin-right: 0.5rem;
-      }
-
-      .hourly-weather-item img {
-        width: 2rem;
-        height: 2rem;
-      }
-
-      @media (max-width: 991.98px) {
-        .display-3 {
-          font-size: 2rem;
-        }
-
-        .hourly-weather-item p {
-          font-size: 0.875rem;
-        }
-
-        .hourly-weather-item img {
-          width: 1.5rem;
-          height: 1.5rem;
-        }
-      }
-
-      @media (max-width: 767.98px) {
-        .display-3 {
-          font-size: 1.5rem;
-        }
-
-        .hourly-weather-item p {
-          font-size: 0.75rem;
-        }
-
-        .hourly-weather-item img {
-          width: 1.25rem;
-          height: 1.25rem;
-        }
-      }
-    </style>
+    <meta data-react-helmet="true" charset="utf-8" />
+    <meta data-react-helmet="true" name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Prediksi - PKM Suhu</title>
+    <link rel="icon" href="static/img/favicon.png" type="image/png" />
+    <link rel="stylesheet" href="static/css/style.css" />
+    <link rel="stylesheet" href="static/css/style-old.css" />
   </head>
-  <body>
-    <section class="dashboard">
-      <div class="card card-weather">
-        <div class="card-body">
-          <!-- Left side: Weather information -->
-          <div class="weather-date-location">
-            <h3 id="current-day">Friday</h3>
-            <p class="text-gray">
-              <span class="weather-date" id="current-date">25 March, 2019</span>
-              <span class="weather-location" id="current-location">Sydney, Australia</span>
-            </p>
-          </div>
-          <div class="weather-data d-flex">
-            <div class="mr-auto">
-              <h4 class="display-3">
-                <span id="current-temperature">32</span>
-                <span class="symbol">&deg;</span>C
-              </h4>
-              <p id="current-weather">Cloudy</p>
+  <body class="ci-4881" inmaintabuse="1" data-tb-shadow-template-hpp-setup="true" data-tb-shadow-template-hpp-enabled="false" data-tb-dashboard="today_v3" data-tb-publisherid="theweatherchannel">
+    <div class="appWrapper DaybreakLargeScreen LargeScreen lightTheme twcTheme DaybreakLargeScreen--appWrapper--3kKUE gradients--cloudyFoggyDay--R2hTM gradients--cloudyFoggyDay-top--3dKG9" id="appWrapper">
+      <div class="region-meta">
+        <div id="WxuHtmlHead-meta-" class="removeIfEmpty"></div>
+        <div id="WxuNewsroom-meta-bc9f40d5-d941-4fd8-bae2-2d8d63a38bb3" class="removeIfEmpty"></div>
+      </div>
+      <div class="region-header regionHeader gradients--cloudyFoggyDay-top--3dKG9" id="regionHeader">
+        <div id="WxuHeaderLargeScreen-header-9944ec87-e4d4-4f18-b23e-ce4a3fd8a3ba" class="removeIfEmpty">
+          
+        </div>
+        <div id="WxuSavedLocations-header-9aea3e61-fbf8-4da4-9e07-f96abf18cdf1" class="removeIfEmpty">
+          <div class="styles--SavedLocations--fzn1u">
+            <div class="styles--wrapper--2NxIC">
+              <div class="styles--root--4doPj" aria-label="Lokasi Tersimpan" role="region">
+                <div class="styles--cards--39bdo styles--cardCarousel--Yl375" style="transform: translateX(0px)"></div>
+                <div class="styles--arrow--Z56fm styles--left--5iIKc styles--mini--26qFQ gradients--cloudyFoggyDay-top--3dKG9">
+                  <svg set="ui" name="caret-left" theme="light" class="Icon--icon--2aW0V Icon--lightTheme--2Ktm2 styles--caretFill--3osOg" data-testid="Icon" viewBox="0 0 24 24">
+                    <title>Arrow Left</title>
+                    <path d="M7.914 12l7.293 7.293a1 1 0 1 1-1.414 1.414l-8-8a1 1 0 0 1 0-1.414l8-8a1 1 0 1 1 1.414 1.414L7.914 12z"></path>
+                  </svg>
+                </div>
+                <div class="styles--arrow--Z56fm styles--right--3v-WJ styles--mini--26qFQ gradients--cloudyFoggyDay-top--3dKG9">
+                  <svg set="ui" name="caret-right" theme="light" class="Icon--icon--2aW0V Icon--lightTheme--2Ktm2 styles--caretFill--3osOg" data-testid="Icon" viewBox="0 0 24 24">
+                    <title>Arrow Right</title>
+                    <path d="M15.086 12L7.793 4.707a1 1 0 1 1 1.414-1.414l8 8a1 1 0 0 1 0 1.414l-8 8a1 1 0 1 1-1.414-1.414L15.086 12z"></path>
+                  </svg>
+                </div>
+              </div>
             </div>
           </div>
-          <!-- Right side: Plant care information -->
-          <div class="plant-care-info">
-            <h3>Plant Care Information</h3>
-            <div id="plant-care-info">
-              <!-- Plant care information will be appended here dynamically -->
-            </div>
-          </div>
-          <div class="weakly-weather" id="forecast">
-            <!-- Forecast items will be appended here dynamically -->
+        </div>
+        <div id="WxuLocalsuiteNav-header-71dadf79-621d-43ff-9a1a-d99a39f16abe" class="removeIfEmpty">
+          <div class="styles--LocalsuiteNavBkgnd--25u2e">
+            <nav class="styles--LocalsuiteNav--25qVv">
+              <div class="styles--inner--P-HL4 layout-centered">
+                <div class="styles--OverflowNav--AWKwe styles--overflowNav--cdZvZ">
+                  <a
+                    class="ListItem--listItem--25ojW styles--listItem--2CkF3 Button--default--2gfm1"
+                    href="{{ url_for('index') }}"
+                    data-from-string="localsuiteNav_2_Beranda"
+                    event="true"
+                    ><span class="styles--liContent--3lr9O">Beranda</span></a
+                  >
+                  <a
+                    class="ListItem--listItem--25ojW styles--listItem--2CkF3 styles--active--1ihhY Button--default--2gfm1"
+                    href="#WxuCurrentConditions-main-b3094163-ef75-4558-8d9a-e35e6b9b1034"
+                    target="_self"
+                    data-from-string="localsuiteNav_1_Hari Ini"
+                    event="true"
+                    ><span class="styles--liContent--3lr9O">Hari Ini</span></a
+                  >
+                  <a
+                    class="ListItem--listItem--25ojW styles--listItem--2CkF3 Button--default--2gfm1"
+                    href="#forecast"
+                    target="_self"
+                    data-from-string="localsuiteNav_3_6 Hari"
+                    event="true"
+                    ><span class="styles--liContent--3lr9O">6 Hari</span></a>
+                  <a
+                    class="ListItem--listItem--25ojW styles--listItem--2CkF3 Button--default--2gfm1"
+                    href="{{ url_for('about') }}"
+                    data-from-string="localsuiteNav_4_Tentang"
+                    event="true"
+                    ><span class="styles--liContent--3lr9O">Tentang</span></a
+                  >
+                </div>
+              </div>
+            </nav>
           </div>
         </div>
       </div>
-    </section>
+      <main id="MainContent">
+        <div class="DaybreakLargeScreen--gridWrapper--3sleb">
+          <div id="wx-hero-content" class="js-branded-background-ads"></div>
+          <main class="region-main regionMain DaybreakLargeScreen--regionMain--1FzNI" aria-label="Main Content">
+            <div id="WxuCurrentConditions-main-b3094163-ef75-4558-8d9a-e35e6b9b1034" class="removeIfEmpty">
+              <div class="CurrentConditions--CurrentConditions--1XEyg" data-testid="CurrentConditionsContainer">
+                <section
+                  aria-label='Me=>Me("wxu-today-details","currentConditions",Ae(Me))'
+                  class="card Card--card--2AzRg CurrentConditions--card--2Kcsq CurrentConditions--imageCard--3q8K_ WeatherBackground--WeatherBackground--2gfYb Card--containerQuery--T7772"
+                  style="background-color: #f3b664;">
+                  <div class="Card--content--1GQMr CurrentConditions--content--3w3sk">
+                    <div data-cq-observe="true" data-cq-breakpoints='{"CurrentConditions--large--2pnSO":560}' class="CurrentConditions--large--2pnSO">
+                      <div class="CurrentConditions--header--kbXKR">
+                        <div class="weather-date-location">
+                        <h1 class="CurrentConditions--location--1YWj_ weather-location" id="current-location">Indonesia</h1>
+                      </div>
+                      </div>
+                      <div class="CurrentConditions--body--l_4-Z">
+                        <div class="CurrentConditions--columns--30npQ">
+                          <div class="CurrentConditions--primary--2DOqs">
+                            <h1 class="CurrentConditions--location--1YWj_" id="current-day" class="">Gambir</h1>
+                            <span data-testid="TemperatureValue" class="CurrentConditions--tempValue--MHmYY" dir="ltr" id="current-temperature">32<span class="CurrentConditions--degreeSymbol--4RS_X">°</span></span>
+                            <div data-testid="wxPhrase" class="CurrentConditions--phraseValue--mZC_p" id="current-weather">Kabut</div>
+                            <div class="CurrentConditions--tempHiLoValue--3T1DG">
+                              <span class="weather-date" id="current-date">25 March, 2019</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="CurrentConditions--messaging--3rN-a"></div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+            <div id="WxuTodayWeatherCard-main-486ce56c-74e0-4152-bd76-7aea8e98520a" class="removeIfEmpty">
+              <section class="card Card--card--2AzRg Card--containerQuery--T7772">
+                <header data-testid="HeaderTitle" class="Card--cardHeader--3NRFf header-container">
+                  <div class="header-left">
+                    <h2 class="Card--cardHeading--2H1-_">Panduan Perawatan Kebun</h2>
+                    <img src="static/img/air.png" alt="Pemberian Air" style="width: 150px; height: auto;">
+                  </div>
+                  <div class="header-right" id="plant-care-info">
+                    <li class="Column--column--3tAuz Column--active--27U5T Column--verticalStack--28b4K">
+                      <!-- Plant care information will be appended here dynamically -->
+                      <div>Perkiraan Suhu</div>
+                      <div>Penyiraman dapat dilakukan setiap 7-10 hari</div>
+                    </li>
+                  </div>
+                </header>
+              </section>
+            </div>
+            <div id="WxuTodayWeatherCard-main-486ce56c-74e0-4152-bd76-7aea8e98520a" class="removeIfEmpty">
+              <section class="card Card--card--2AzRg Card--containerQuery--T7772">
+                <header data-testid="HeaderTitle" class="Card--cardHeader--3NRFf header-container">
+                        <div class="weakly-weather" id="forecast">
+                          <!-- Forecast items will be appended here dynamically -->
+                        </div>
+                  
+                </header>
+              </section>
+            </div>
+            
+          </main>
+          <aside class="region-sidebar regionSidebar DaybreakLargeScreen--regionSidebar--20oS9" aria-label="Sidebar">
+            <div id="WxuAirQuality-sidebar-aa4a4fb6-4a9b-43be-9004-b14790f57d73" class="removeIfEmpty">
+              <div data-cq-observe="true" data-cq-breakpoints='{"AirQuality--sm--1F-8j":0,"AirQuality--md--uS8YB":649}' class="AirQuality--airQualitySuite--25n8w AirQuality--sm--1F-8j">
+                <section aria-label="INDEKS KUALITAS UDARA" class="card Card--card--2AzRg Card--containerQuery--T7772" title="INDEKS KUALITAS UDARA" data-testid="AirQualityModule">
+                  <header data-testid="HeaderTitle" class="Card--cardHeader--3NRFf"><h2 class="Card--cardHeading--2H1-_">KETERANGAN ICON</h2></header>
+                  <div class="Card--content--1GQMr">
+                    <div class="AirQuality--AirQualityCard--EONAt" data-testid="AirQualityCard">
+                      <div class="AirQuality--center--2mEW_ AirQuality--leftCol--32BhX">
+                        <div class="AirQuality--col--3I-4C">
+                          <table class="aside-table">
+                            <tbody>
+                              <tr>
+                                <th>Day Icon</th>
+                                <th>Night Icon</th>
+                                <th>Description</th>
+                              </tr>
+                              <tr>
+                                <td><img src="http://openweathermap.org/img/wn/01d@2x.png" alt="" class="icon-img" /></td>
+                                <td><img src="http://openweathermap.org/img/wn/01n@2x.png" alt="" class="icon-img" /></td>
+                                <td>Clear Sky</td>
+                              </tr>
+                              <tr>
+                                <td><img src="http://openweathermap.org/img/wn/02d@2x.png" alt="" class="icon-img" /></td>
+                                <td><img src="http://openweathermap.org/img/wn/02n@2x.png" alt="" class="icon-img" /></td>
+                                <td>Few Clouds</td>
+                              </tr>
+                              <tr>
+                                <td><img src="http://openweathermap.org/img/wn/03d@2x.png" alt="" class="icon-img" /></td>
+                                <td><img src="http://openweathermap.org/img/wn/03n@2x.png" alt="" class="icon-img" /></td>
+                                <td>Scattered Clouds</td>
+                              </tr>
+                              <tr>
+                                <td><img src="http://openweathermap.org/img/wn/04d@2x.png" alt="" class="icon-img" /></td>
+                                <td><img src="http://openweathermap.org/img/wn/04n@2x.png" alt="" class="icon-img" /></td>
+                                <td>Broken Clouds</td>
+                              </tr>
+                              <tr>
+                                <td><img src="http://openweathermap.org/img/wn/09d@2x.png" alt="" class="icon-img" /></td>
+                                <td><img src="http://openweathermap.org/img/wn/09n@2x.png" alt="" class="icon-img" /></td>
+                                <td>Shower Rain</td>
+                              </tr>
+                              <tr>
+                                <td><img src="http://openweathermap.org/img/wn/10d@2x.png" alt="" class="icon-img" /></td>
+                                <td><img src="http://openweathermap.org/img/wn/10n@2x.png" alt="" class="icon-img" /></td>
+                                <td>Rain</td>
+                              </tr>
+                              <tr>
+                                <td><img src="http://openweathermap.org/img/wn/11d@2x.png" alt="" class="icon-img" /></td>
+                                <td><img src="http://openweathermap.org/img/wn/11n@2x.png" alt="" class="icon-img" /></td>
+                                <td>Thunderstorm</td>
+                              </tr>
+                              <tr>
+                                <td><img src="http://openweathermap.org/img/wn/13d@2x.png" alt="" class="icon-img" /></td>
+                                <td><img src="http://openweathermap.org/img/wn/13n@2x.png" alt="" class="icon-img" /></td>
+                                <td>Snow</td>
+                              </tr>
+                              <tr>
+                                <td><img src="http://openweathermap.org/img/wn/50d@2x.png" alt="" class="icon-img" /></td>
+                                <td><img src="http://openweathermap.org/img/wn/50n@2x.png" alt="" class="icon-img" /></td>
+                                <td>Mist</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </aside>
+        </div>
+        
+      </main>
+      
+      <footer class="region-footer regionFooter DaybreakLargeScreen--regionFooter--ast4b">
+        <div id="WxuFooter-footer-5b5ebc4f-6cb5-4bcf-8c09-60524c9ff62d" class="removeIfEmpty">
+          <div data-testid="Footer" class="Footer--container--2e0ff">
+            <div class="Footer--Footer--2ulHH">
+              <div class="Footer--socialLogos--qYCPZ">
+                <div class="Footer--socialContainer--3z8CW">
+                  <span class="Footer--connect--1Ohkt">Terhubung Dengan Kami</span>
+                  <ul class="LinkList--LinkList--1GnPm Footer--linklist--_Dbmr Footer--socialLinks--25Y9Z LinkList--inline-no-border--33kpL" locale="id-ID">
+                    
+                    <li>
+                      <a class="LinkList--Link--34-VU" target="_blank" rel="noopener noreferrer nofollow" data-testid="instagram" href="https://www.instagram.com/pkmpolinema.prediksisuhu/" aria-label="instagram, opens in new window"
+                        ><svg set="footer" name="instagram" class="Icon--icon--2aW0V Footer--icon--2G63B" theme="" data-testid="Icon" viewBox="0 0 24 24">
+                          <title>Instagram</title>
+                          <path
+                            d="M13.027 2c1.8.004 2.182.018 3.096.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.771c.247.637.416 1.364.465 2.428.042.914.056 1.295.06 3.095v2.055c-.004 1.8-.018 2.182-.06 3.096-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06s-3.056-.012-4.123-.06c-1.064-.049-1.791-.218-2.428-.465a4.902 4.902 0 01-1.77-1.153 4.902 4.902 0 01-1.154-1.772c-.247-.636-.416-1.363-.465-2.427-.042-.914-.056-1.295-.06-3.096v-2.055c.004-1.8.018-2.18.06-3.095.049-1.064.218-1.791.465-2.428a4.902 4.902 0 011.153-1.77A4.902 4.902 0 015.45 2.524c.637-.247 1.364-.416 2.428-.465.914-.042 1.295-.056 3.095-.06zm-.471 1.802h-1.112c-2.165.001-2.509.013-3.485.058-.975.044-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.045.976-.057 1.32-.058 3.485v1.112c.001 2.165.013 2.508.058 3.485.044.975.207 1.504.344 1.857.182.466.398.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344.976.044 1.32.056 3.485.058h1.112c2.165-.002 2.509-.014 3.485-.058.975-.045 1.504-.207 1.857-.344.466-.182.8-.399 1.15-.749.35-.35.566-.683.748-1.15.137-.352.3-.881.344-1.856.044-.977.056-1.32.058-3.485v-1.112c-.002-2.165-.014-2.509-.058-3.485-.045-.975-.207-1.504-.344-1.857a3.098 3.098 0 00-.749-1.15 3.098 3.098 0 00-1.15-.748c-.352-.137-.881-.3-1.856-.344-.977-.045-1.32-.057-3.485-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+                            fill="#2B2B2B"
+                            fill-rule="evenodd"></path></svg
+                      ></a>
+                    </li>
+                    <li>
+                      <a class="LinkList--Link--34-VU" target="_blank" rel="noopener noreferrer nofollow" data-testid="youtube" href="https://www.youtube.com/@pkmpolinemaprediksisuhu" aria-label="youtube, opens in new window"
+                        ><svg set="footer" name="youtube" class="Icon--icon--2aW0V Footer--icon--2G63B" theme="" data-testid="Icon" viewBox="0 0 24 24">
+                          <title>Youtube</title>
+                          <path
+                            d="M12.35 5c1.34.008 6.125.06 7.462.42.86.231 1.538.913 1.768 1.78.39 1.465.416 4.415.418 4.802v.085c-.002.387-.028 3.337-.418 4.803a2.513 2.513 0 01-1.768 1.78c-1.374.37-6.391.414-7.566.42h-.495c-1.175-.006-6.192-.05-7.566-.42a2.513 2.513 0 01-1.769-1.78c-.376-1.413-.413-4.208-.417-4.752v-.187c.004-.545.041-3.339.417-4.752a2.513 2.513 0 011.769-1.78c1.336-.36 6.122-.411 7.462-.419zM9.952 9.07v5.948l5.227-2.973L9.953 9.07z"
+                            fill="#2B2B2B"
+                            fill-rule="evenodd"></path></svg
+                      ></a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="Footer--logoLockup--2hZ2n Footer--linkSpacing--2btw-">
+                  <svg
+                    class="Icon--icon--2aW0V Footer--iconWeatherCompany--24Csd"
+                    set="footer"
+                    name="the-weather-company"
+                    height="70"
+                    theme=""
+                    data-testid="Icon"
+                    aria-label="PKM PI Polinema"
+                    width="70"
+                    version="1.1"
+                    id="Layer_1"
+                    viewBox="0 0 228.42 174.54"
+                    xml:space="preserve">
+                    <style type="text/css">
+                      .st0 {
+                        fill: #00279e;
+                      }
+                      .st1 {
+                        fill: #27aeff;
+                      }
+                      .st2 {
+                        opacity: 0.75;
+                      }
+                    </style>
+              <div class="Footer--attribution--gEhVf">
+                <p data-testid="Copyright" class="TwcCopyright--copyright--3TVcz"><span>© PKM PI Polinema Prediksi Suhu - 2024</span></p>
+              </div>
+      </footer>
+    </div>
+    <script src="static/js/script.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
@@ -179,73 +296,82 @@
                 longitude: position.coords.longitude,
               }),
             })
-              .then((response) => response.json())
-              .then((data) => {
-                if (data.status === "success") {
-                  // Update current weather
-                  const currentDate = new Date(data.current.date * 1000);
-                  const options = {
-                    weekday: "long",
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                    hour: "numeric",
-                    minute: "numeric",
-                    hour12: true,
-                  };
-                  const formattedDate = currentDate.toLocaleDateString("en-US", options);
-                  const [datePart, timePart] = formattedDate.split(" at ");
-                  document.getElementById("current-day").textContent = datePart;
-                  document.getElementById("current-date").textContent = timePart;
-                  document.getElementById("current-location").textContent = `${data.current.location}`;
-                  document.getElementById("current-temperature").textContent = data.current.temperature;
-                  document.getElementById("current-weather").textContent = `${data.current.weather} - ${data.current.description}`;
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.status === "success") {
+                // Update current weather
+                const currentDate = new Date(data.current.date * 1000);
+                const options = {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                  hour: "numeric",
+                  minute: "numeric",
+                  hour12: false,
+                };
+                const formattedDate = currentDate.toLocaleDateString("id-ID", options);
+                const [datePart, timePart] = formattedDate.split(" at ");
+                
+                document.getElementById("current-day").textContent = datePart;
+                document.getElementById("current-date").textContent = timePart;
+                document.getElementById("current-location").textContent = data.current.location;
+                
+                // Round the temperature to the nearest integer
+                const roundedTemperature = Math.round(data.current.temperature);
+                document.getElementById("current-temperature").innerHTML = `${roundedTemperature}<span class="CurrentConditions--degreeSymbol--4RS_X">°</span>`;
+                document.getElementById("current-weather").textContent = `${data.current.weather} - ${data.current.description}`;
 
-                  // Update plant care information
-                  const plantCareInfoContainer = document.getElementById("plant-care-info");
-                  const plantCareInfo = data.plant_care_info;
-                  const plantCareInfoHtml = `
-                            <p>${plantCareInfo.category}</p>
-                            <ul>
-                                ${plantCareInfo.info.map((info) => `<li>${info}</li>`).join("")}
-                            </ul>
-                        `;
-                  plantCareInfoContainer.innerHTML = plantCareInfoHtml;
+                // Update plant care information
+                const plantCareInfoContainer = document.getElementById("plant-care-info");
+                const plantCareInfo = data.plant_care_info;
+                const plantCareInfoHtml = `
+                          <p>${plantCareInfo.category}</p>
+                          <ul>
+                              ${plantCareInfo.info.map((info) => `<li>${info}</li>`).join("")}
+                          </ul>
+                      `;
+                plantCareInfoContainer.innerHTML = plantCareInfoHtml;
 
-                  // Update 5-day forecast with 3-hour intervals
-                  const forecastContainer = document.getElementById("forecast");
-                  forecastContainer.innerHTML = "";
-                  for (let date in data.forecasts) {
-                    const dailyForecasts = data.forecasts[date];
-                    const dailyForecastContainer = document.createElement("div");
-                    dailyForecastContainer.className = "daily-forecast";
-                    dailyForecastContainer.innerHTML = `<div class="forecast-title">${new Date(dailyForecasts[0].time * 1000).toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}</div>`;
-                    const hourlyWeatherContainer = document.createElement("div");
-                    hourlyWeatherContainer.className = "hourly-weather";
-                    dailyForecasts.forEach((forecast) => {
-                      const forecastDate = new Date(forecast.time * 1000);
-                      const forecastItem = document.createElement("div");
-                      forecastItem.className = "hourly-weather-item";
-                      forecastItem.innerHTML = `
-                                    <p class="mb-0">${forecastDate.getHours()}:00</p>
-                                    <img src="http://openweathermap.org/img/wn/${forecast.icon}.png" alt="Weather Icon">
-                                    <p class="mb-0">${forecast.temperature}&deg;C</p>
-                                `;
-                      hourlyWeatherContainer.appendChild(forecastItem);
-                    });
-                    dailyForecastContainer.appendChild(hourlyWeatherContainer);
-                    forecastContainer.appendChild(dailyForecastContainer);
-                  }
-                } else {
-                  alert(data.message);
+                // Update 5-day forecast with 3-hour intervals
+                const forecastContainer = document.getElementById("forecast");
+                forecastContainer.innerHTML = "";
+                for (let date in data.forecasts) {
+                  const dailyForecasts = data.forecasts[date];
+                  const dailyForecastContainer = document.createElement("div");
+                  dailyForecastContainer.className = "daily-forecast";
+                  dailyForecastContainer.innerHTML = `<div class="forecast-title">${new Date(dailyForecasts[0].time * 1000).toLocaleDateString("id-ID", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}</div>`;
+                  const hourlyWeatherContainer = document.createElement("div");
+                  hourlyWeatherContainer.className = "hourly-weather";
+                  dailyForecasts.forEach((forecast) => {
+                    const forecastDate = new Date(forecast.time * 1000);
+                    const forecastItem = document.createElement("div");
+                    forecastItem.className = "hourly-weather-item";
+                    forecastItem.innerHTML = `
+                                  <p class="mb-0">${forecastDate.getHours()}:00</p>
+                                  <img src="http://openweathermap.org/img/wn/${forecast.icon}.png" alt="Weather Icon">
+                                  <p class="mb-0">${forecast.temperature}&deg;C</p>
+                              `;
+                    hourlyWeatherContainer.appendChild(forecastItem);
+                  });
+                  dailyForecastContainer.appendChild(hourlyWeatherContainer);
+                  forecastContainer.appendChild(dailyForecastContainer);
                 }
-              })
-              .catch((error) => console.error("Error:", error));
+
+              } else {
+                alert(data.message);
+              }
+            })
+            .catch((error) => console.error("Error:", error));
+          }, (error) => {
+            console.error("Geolocation error:", error);
+            alert("Unable to retrieve your location.");
           });
         } else {
           alert("Geolocation is not supported by this browser.");
         }
       };
     </script>
+    
   </body>
 </html>

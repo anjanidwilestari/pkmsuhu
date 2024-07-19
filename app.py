@@ -68,52 +68,42 @@ def get_location():
         return jsonify({"status": "error", "message": error_message}), 500
 
 def get_plant_care_info(temperature):
-    if temperature < 10:
+    if temperature < 15:
         return {
-            'category': 'Suhu Dingin (di bawah 10°C)',
+            'category': 'Suhu Dingin (di bawah 15°C)',
             'info': [
-                'Lindungi tanaman dari embun beku dengan penghangat atau penutup.',
-                'Periksa tanaman secara rutin untuk mencegah kerusakan.'
+                'Lakukan penyiraman air setiap 7-10 hari.',
+                'Berikan pupuk sekitar 5-10 kg per pohon dalam 2-3 bulan.'
             ]
         }
-    elif 10 <= temperature < 20:
+    elif 15 <= temperature < 25:
         return {
-            'category': 'Suhu 10-20°C',
+            'category': 'Suhu Optimal (sekitar 15-25°C)',
             'info': [
-                'Lindungi tanaman dari sinar matahari langsung yang terlalu intens.',
-                'Pastikan kelembaban tanah cukup tetapi tidak berlebihan.',
-                'Jaga agar tanah tetap gembur untuk pertumbuhan akar yang sehat.'
-            ]
-        }
-    elif 20 <= temperature < 30:
-        return {
-            'category': 'Suhu Optimal (sekitar 20-30°C)',
-            'info': [
-                'Pastikan tanaman mendapatkan cahaya matahari yang cukup.',
-                'Monitor kelembaban tanah dan penyiraman secara teratur.'
-            ]
-        }
-    elif 30 <= temperature < 35:
-        return {
-            'category': 'Suhu 30-35°C',
-            'info': [
-                'Lindungi tanaman dari sinar matahari langsung yang terlalu intens dengan peneduh.',
-                'Pastikan tanah tetap lembab dengan penyiraman lebih sering.',
-                'Berikan ventilasi yang cukup untuk mengurangi panas berlebih.'
+                'Lakukan penyiraman air setiap 5-7 hari.',
+                'Berikan pupuk sekitar 200-300 gram per pohon dalam 1-2 bulan.'
             ]
         }
     else:
         return {
-            'category': 'Suhu Panas (di atas 35°C)',
+            'category': 'Suhu Panas (di atas 25°C)',
             'info': [
-                'Lindungi tanaman dari panas berlebih dengan teduhkan dan penyiraman ekstra.',
-                'Pertimbangkan untuk menggunakan mulsa atau penutup tanah untuk menjaga kelembaban.'
+                'Lakukan penyiraman air setiap 2-4 hari.',
+                'Berikan pupuk sekitar 300-500 gram per pohon dalam 1 bulan.'
             ]
         }
 
 @app.route('/predict')
 def predict():
     return render_template('predict.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/coba')
+def coba():
+    return render_template('coba-widget.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
