@@ -1,0 +1,189 @@
+/* Base styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navigation bar styles */
+nav {
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+nav .nav-container {
+  display: flex;
+  justify-content: center;
+}
+
+nav .nav-items {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+nav a {
+  display: inline-block;
+  color: #333;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+nav a:hover {
+  background-color: #f5f5f5;
+}
+
+nav a.active {
+  background-color: #0073e6;
+  color: #fff;
+}
+
+nav .button-default {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+nav .more-forecasts-button {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #0073e6;
+  color: #fff;
+  border-radius: 4px;
+}
+
+nav .more-forecasts-button .icon {
+  margin-left: 5px;
+}
+
+nav .expandable-menu {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  width: 200px;
+  display: none;
+}
+
+nav .expandable-menu.show {
+  display: block;
+}
+
+nav .expandable-menu-content {
+  padding: 10px;
+}
+
+nav .expandable-menu-content a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+}
+
+nav .expandable-menu-content a:hover {
+  background-color: #f5f5f5;
+}
+
+nav .nav-link-icon {
+  margin-left: 10px;
+}
+
+.CurrentConditions {
+  background-color: #f9f9f9; /* Light gray background */
+  border: 1px solid #ddd;
+  padding: 20px;
+  max-width: 800px;
+  margin: 20px auto;
+  border-radius: 8px;
+}
+
+/* Header styles */
+.CurrentConditions--header {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.CurrentConditions--location {
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.CurrentConditions--timestamp {
+  color: #777;
+}
+
+/* Body styles */
+.CurrentConditions--body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Primary weather info */
+.CurrentConditions--primary {
+  flex: 1;
+}
+
+.CurrentConditions--tempValue {
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+.CurrentConditions--degreeSymbol {
+  font-size: 1em;
+}
+
+.CurrentConditions--phraseValue {
+  font-size: 1.2em;
+  color: #555;
+}
+
+.CurrentConditions--tempHiLoValue {
+  margin-top: 10px;
+}
+
+.CurrentConditions--tempHiLoValue span {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+/* Secondary weather info */
+.CurrentConditions--secondary {
+  flex: 0 0 auto;
+}
+
+.CurrentConditions--wxIcon {
+  width: 100px;
+  height: 100px;
+}
+
+/* Messaging */
+.CurrentConditions--messaging {
+  margin-top: 20px;
+}
+
+.CurrentConditions--overlayBox {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+}
+
+.CurrentConditions--videoPlayIcon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.CurrentConditions--watch {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.CurrentConditions--ellipsis {
+  font-style: italic;
+}

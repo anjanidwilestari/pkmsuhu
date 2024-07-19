@@ -24,11 +24,11 @@ def get_location():
         # Get current weather information
         current_data = {
             'date': current_weather_data['dt'],
-            'location': f"{current_weather_data['name']}, {current_weather_data['sys']['country']}",  # Include country name
+            'location': f"{current_weather_data['name']}, {current_weather_data['sys']['country']}",
             'temperature': current_weather_data['main']['temp'],
             'weather': current_weather_data['weather'][0]['main'],
             'description': current_weather_data['weather'][0]['description'],
-            'icon': current_weather_data['weather'][0]['icon']  # Add icon from API
+            'icon': current_weather_data['weather'][0]['icon']
         }
 
         # Determine plant care based on temperature
@@ -40,31 +40,25 @@ def get_location():
         forecast_weather_data = forecast_response.json()
 
         if forecast_response.status_code == 200:
-            # Get 5-day forecast starting from the day after today
-            forecasts = []
-            dates_seen = set()
-            today_date = current_data['date']
+            # Organize forecast data into a dictionary keyed by date
+            forecasts = {}
             for forecast in forecast_weather_data['list']:
-                # Extract date without time
                 date = forecast['dt_txt'].split()[0]
-                if date not in dates_seen and forecast['dt'] > today_date:
-                    forecast_data = {
-                        'date': forecast['dt'],
-                        'temperature': forecast['main']['temp'],
-                        'weather': forecast['weather'][0]['main'],
-                        'description': forecast['weather'][0]['description'],
-                        'icon': forecast['weather'][0]['icon']  # Add icon from API
-                    }
-                    forecasts.append(forecast_data)
-                    dates_seen.add(date)
-                    if len(forecasts) == 5:
-                        break
+                if date not in forecasts:
+                    forecasts[date] = []
+                forecasts[date].append({
+                    'time': forecast['dt'],
+                    'temperature': forecast['main']['temp'],
+                    'weather': forecast['weather'][0]['main'],
+                    'description': forecast['weather'][0]['description'],
+                    'icon': forecast['weather'][0]['icon']
+                })
 
             return jsonify({
                 "status": "success",
                 "current": current_data,
                 "forecasts": forecasts,
-                "plant_care_info": plant_care_info  # Include plant care information
+                "plant_care_info": plant_care_info
             })
         else:
             error_message = f"Unable to get forecast weather data. Error code {forecast_weather_data['cod']}: {forecast_weather_data['message']}"

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Navigation</title>
+    <link rel="stylesheet" href="static/style.css" />
+  </head>
+  <body>
+    <div id="nav-header">
+      <nav>
+        <div class="nav-container">
+          <div class="nav-items">
+            <a class="nav-item active" href="/weather/today" target="_self">
+              <span>Today</span>
+            </a>
+            <a class="nav-item" href="/weather/hourly" target="_self">
+              <span>Hourly</span>
+            </a>
+            <a class="nav-item" href="/weather/10day" target="_self">
+              <span>10 Day</span>
+            </a>
+            <a class="nav-item" href="/weather/weekend" target="_self">
+              <span>Weekend</span>
+            </a>
+            <a class="nav-item" href="/weather/monthly" target="_self">
+              <span>Monthly</span>
+            </a>
+            <a class="nav-item" href="/weather/radar" target="_self">
+              <span>Radar</span>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div class="CurrentConditions">
+      <div class="CurrentConditions--header">
+        <h1 class="CurrentConditions--location">Kapasari, East Java, Indonesia</h1>
+        <span class="CurrentConditions--timestamp">As of 11:25 am WIB</span>
+      </div>
+      <div class="CurrentConditions--body">
+        <div class="CurrentConditions--columns">
+          <div class="CurrentConditions--primary">
+            <span class="CurrentConditions--tempValue">89<span class="CurrentConditions--degreeSymbol">°</span></span>
+            <div class="CurrentConditions--phraseValue">Fair</div>
+            <div class="CurrentConditions--tempHiLoValue">
+              Day&nbsp;<span class="CurrentConditions--tempValue">91<span>°</span></span> • Night&nbsp;<span class="CurrentConditions--tempValue">74<span>°</span></span>
+            </div>
+          </div>
+          <div class="CurrentConditions--secondary">
+            <svg class="CurrentConditions--wxIcon" viewBox="0 0 200 200">
+              <title>Mostly Sunny</title>
+              <use xlink:href="#svg-symbol-sun" transform="scale(.8)"></use>
+              <use xlink:href="#svg-symbol-cloud" transform="matrix(.57 0 0 .57 74 8)" stroke-width="0"></use>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
